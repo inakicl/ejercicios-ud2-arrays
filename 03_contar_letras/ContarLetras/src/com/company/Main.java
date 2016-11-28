@@ -6,57 +6,50 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    public static int visualizarRecuento(int[] recuento) {
+    public static int []  contarLetras(char[] texto, char[] alfabeto) {
 
-        for (int i = 0; i <; i++) {
-            switch (recuento) {
+        int[] recuento = new int[alfabeto.length];
+        for (int i = 0; i < texto.length; i++) {
+            for (int j = 0; j < alfabeto.length; j++) {
+                if (texto[i] == alfabeto[j]) {
+                    recuento[j] += 1;
 
-            }
-        }
-
-
-    }
-
-    //podria hacerse un array de 2 dimensiones [][]
-    public static int[] contarLetras(String frase) {
-        final int alfabeto = 27;
-        int[] recuento;
-        recuento = new int[alfabeto];
-
-        for (int i = 0; i < frase.length(); i++) {
-            char delafrase = frase.charAt(i);
-            switch (delafrase) {
-                case 'a':
-                    recuento[0] += 1;
-                    break;
-                case 'b':
-                    recuento[1] += 1;
-                    break;
-                case 'c':
-                    recuento[2] += 1;
-                    break;
-
+                }
             }
 
-            delafrase += 1;
-
+        } return recuento;
+        
+        public static void visualizarRecuento(){
+        for (int i = 0; i < ; i++) {
+            
         }
-        return recuento;
+    
+    
     }
+
 
 
     public static void main(String[] args) throws IOException {
 
-        final int alfabeto = 27;
-        int[] recuento;
-        recuento = new int[alfabeto];
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Introduce un texto: ");
+        System.out.println("Introduce un texto: ");
 
-        String texto = br.readLine();
-        contarLetras(texto);
+        String texto = br.readLine().toUpperCase();
+        final int alberto = 27;
+        char[] alfabetoUsuario = new char[alberto];
 
+       String alfabeto = "ABCDEFGHIJKLMÑOPQRSTUVWXYZ";
+        
+               
+        }
 
+        char[] textoUsuario = texto.toCharArray();
+        int[] recuento = contarLetras(alfabeto, textoUsuario);
+
+        for (int i = 0; i < recuento.length ; i++) {
+            System.out.print(recuento[i]+" ");
+        }
     }
+
+
 }
