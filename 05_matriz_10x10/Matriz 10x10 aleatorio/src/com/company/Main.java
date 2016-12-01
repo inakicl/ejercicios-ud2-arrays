@@ -18,7 +18,7 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 Random r = new Random();
-                int aleatorio = r.nextInt(100);
+                int aleatorio = r.nextInt(100)-50;
                 matriz[i][j] = aleatorio;
             }
 
