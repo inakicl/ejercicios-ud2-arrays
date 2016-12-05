@@ -95,9 +95,6 @@ public class Main {
         if (tabla[0][2] == 2 && tabla[1][1] == 2 && tabla[2][0] == 2) {
             return true;
         }
-        if (tabla[0][0] != 0 && tabla[0][1] != 0 && tabla[0][2] != 0 && tabla[1][0] != 0 && tabla[1][1] != 0 && tabla[1][2] != 0 && tabla[2][0] != 0 && tabla[2][1] != 0 && tabla[2][2] != 0) {
-            return true;
-        }
 
         return false;
     }
@@ -154,7 +151,7 @@ public class Main {
 
 
         }
-        if (tiradas < 9) {
+        if (tiradas < turnosPosibles) {
             System.out.println("Has ganado");
         } else {
             System.out.println("Empate...");
