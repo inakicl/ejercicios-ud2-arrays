@@ -6,34 +6,32 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    public static void visualizarTablero(int[][] t, int FilaX, int ColumnaY) {
+    public static void visualizarTablero(int[][] t) {
         int fila = t.length;
         int columna = t[0].length;
 
-        String tablero[][] = new String[fila][columna];
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < columna; j++) {
-                if (FilaX == i && ColumnaY == j) {
-                } else {
-                    tablero[i][j] = ".";
-                }
-                if (t[i][j] == 1) {
-                    tablero[i][j] = "0";
-                } else if (t[i][j] == 2) {
-                    tablero[i][j] = "1";
-                }
 
-                System.out.print("    ");
-                System.out.print(tablero[i][j]);
+                switch (t[i][j]) {
+                    case 1:
+                        System.out.print(" 0 ");
+                        break;
+                    case 2:
+                        System.out.print(" X ");
+                        break;
+                    case 0:
+                        System.out.print(" . ");
+                        break;
+                }
             }
-
-            System.out.println();
             System.out.println();
         }
+
     }
 
 
-    public static void comprobarGanador(int[][] tabla) {
+    public static boolean comprobarGanador(int[][] tabla) {
 
         int fila = tabla.length;
         int columna = tabla[0].length;
@@ -48,93 +46,118 @@ public class Main {
         //Comprobaciones de ganador o empate.
         //lineas
         if (tabla[0][0] == 1 && tabla[0][1] == 1 && tabla[0][2] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[0][0] == 2 && tabla[0][1] == 2 && tabla[0][2] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         if (tabla[1][0] == 1 && tabla[1][1] == 1 && tabla[1][2] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[1][0] == 2 && tabla[1][1] == 2 && tabla[1][2] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         if (tabla[2][0] == 1 && tabla[2][1] == 1 && tabla[2][2] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[2][0] == 2 && tabla[2][1] == 2 && tabla[2][2] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         //Columnas
         if (tabla[0][0] == 1 && tabla[1][0] == 1 && tabla[2][0] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[0][0] == 2 && tabla[1][0] == 2 && tabla[2][0] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         if (tabla[0][1] == 1 && tabla[1][1] == 1 && tabla[2][1] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[0][1] == 2 && tabla[1][1] == 2 && tabla[2][1] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         if (tabla[0][2] == 1 && tabla[1][2] == 1 && tabla[2][2] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[0][2] == 2 && tabla[1][2] == 2 && tabla[2][2] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         //En X
         if (tabla[0][0] == 1 && tabla[1][1] == 1 && tabla[2][2] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[0][0] == 2 && tabla[1][1] == 2 && tabla[2][2] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         if (tabla[0][2] == 1 && tabla[1][1] == 1 && tabla[2][0] == 1) {
-            System.out.println("Jugador 1 GANADOR");
+            return true;
         }
         if (tabla[0][2] == 2 && tabla[1][1] == 2 && tabla[2][0] == 2) {
-            System.out.println("Jugador 2 GANADOR");
+            return true;
         }
         if (tabla[0][0] != 0 && tabla[0][1] != 0 && tabla[0][2] != 0 && tabla[1][0] != 0 && tabla[1][1] != 0 && tabla[1][2] != 0 && tabla[2][0] != 0 && tabla[2][1] != 0 && tabla[2][2] != 0) {
-            System.out.println("EMPATE");
+            return true;
         }
 
-
+        return false;
     }
 
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tablero[][] = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tablero[i][j] = 0;
+            }
+        }
         final int turnosPosibles = tablero.length * tablero[0].length;
         int fila = -1;
         int columna = -1;
+        int tiradas = 0;
 
-        visualizarTablero(tablero, fila, columna);
+        visualizarTablero(tablero);
 
         //Que los jugadores metan la casilla donde ponen la ficha, se representan como 0 y 1 depende del jugador 1 o 2.
 
-        for (int i = 0; i < turnosPosibles; i++) {
+        for (int i = 0; i < turnosPosibles && !comprobarGanador(tablero); i++) {
             if (i % 2 == 0) {
                 System.out.println("Turno de Jugador 1\n" + "Fila(entre 0 y 2): ");
                 fila = Integer.parseInt(br.readLine());
                 System.out.println("Columna(entre 0 y 2): ");
                 columna = Integer.parseInt(br.readLine());
-                tablero[fila][columna] = 1;
-                visualizarTablero(tablero, fila, columna);
-                comprobarGanador(tablero);
+                if (tablero[fila][columna] == 0) {
+                    tablero[fila][columna] = 1;
+                    visualizarTablero(tablero);
+                    tiradas += 1;
+                } else {
+                    System.err.println("Casilla ocupada...");
+                    i -= 1;
+                }
+
+
             } else {
                 System.out.println("Turno de Jugador 2\n" + "Fila(entre 0 y 2): ");
                 fila = Integer.parseInt(br.readLine());
                 System.out.println("Columna(entre 0 y 2): ");
                 columna = Integer.parseInt(br.readLine());
-                tablero[fila][columna] = 2;
-                visualizarTablero(tablero, fila, columna);
-                comprobarGanador(tablero);
-            }
-        }
+                if (tablero[fila][columna] == 0) {
+                    tablero[fila][columna] = 2;
+                    visualizarTablero(tablero);
+                    tiradas += 1;
+                } else {
+                    System.err.println("Casilla ocupada...");
+                    i -= 1;
+                }
 
+            }
+
+
+        }
+        if (tiradas < 9) {
+            System.out.println("Has ganado");
+        } else {
+            System.out.println("Empate...");
+        }
     }
 }
