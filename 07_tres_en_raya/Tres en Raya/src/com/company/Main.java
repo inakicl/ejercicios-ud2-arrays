@@ -14,7 +14,6 @@ public class Main {
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < columna; j++) {
                 if (FilaX == i && ColumnaY == j) {
-                    tablero[i][j] = "X";
                 } else {
                     tablero[i][j] = ".";
                 }
@@ -98,7 +97,7 @@ public class Main {
         if (tabla[0][2] == 2 && tabla[1][1] == 2 && tabla[2][0] == 2) {
             System.out.println("Jugador 2 GANADOR");
         }
-        if (tabla[0][0] != 0 && tabla[0][1] != 0 && tabla[0][2] != 0 && tabla[1][0] != 0 && tabla[1][1] != 0 && tabla[1][2] != 0 && tabla[2][0] != 0 && tabla[2][1] != 0 && tabla[2][2] != 0){
+        if (tabla[0][0] != 0 && tabla[0][1] != 0 && tabla[0][2] != 0 && tabla[1][0] != 0 && tabla[1][1] != 0 && tabla[1][2] != 0 && tabla[2][0] != 0 && tabla[2][1] != 0 && tabla[2][2] != 0) {
             System.out.println("EMPATE");
         }
 
@@ -123,16 +122,16 @@ public class Main {
                 fila = Integer.parseInt(br.readLine());
                 System.out.println("Columna(entre 0 y 2): ");
                 columna = Integer.parseInt(br.readLine());
-                visualizarTablero(tablero, fila, columna);
                 tablero[fila][columna] = 1;
+                visualizarTablero(tablero, fila, columna);
                 comprobarGanador(tablero);
             } else {
                 System.out.println("Turno de Jugador 2\n" + "Fila(entre 0 y 2): ");
                 fila = Integer.parseInt(br.readLine());
                 System.out.println("Columna(entre 0 y 2): ");
                 columna = Integer.parseInt(br.readLine());
-                visualizarTablero(tablero, fila, columna);
                 tablero[fila][columna] = 2;
+                visualizarTablero(tablero, fila, columna);
                 comprobarGanador(tablero);
             }
         }
