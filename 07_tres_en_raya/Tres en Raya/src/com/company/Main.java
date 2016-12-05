@@ -109,8 +109,8 @@ public class Main {
             }
         }
         final int turnosPosibles = tablero.length * tablero[0].length;
-        int fila = -1;
-        int columna = -1;
+        int fila;
+        int columna ;
         int tiradas = 0;
 
         visualizarTablero(tablero);
@@ -118,37 +118,26 @@ public class Main {
         //Que los jugadores metan la casilla donde ponen la ficha, se representan como 0 y 1 depende del jugador 1 o 2.
 
         for (int i = 0; i < turnosPosibles && !comprobarGanador(tablero); i++) {
+
+            int turno = 0;
             if (i % 2 == 0) {
-                System.out.println("Turno de Jugador 1\n" + "Fila(entre 0 y 2): ");
-                fila = Integer.parseInt(br.readLine());
-                System.out.println("Columna(entre 0 y 2): ");
-                columna = Integer.parseInt(br.readLine());
-                if (tablero[fila][columna] == 0) {
-                    tablero[fila][columna] = 1;
-                    visualizarTablero(tablero);
-                    tiradas += 1;
-                } else {
-                    System.err.println("Casilla ocupada...");
-                    i -= 1;
-                }
-
-
+                turno = 1;
             } else {
-                System.out.println("Turno de Jugador 2\n" + "Fila(entre 0 y 2): ");
-                fila = Integer.parseInt(br.readLine());
-                System.out.println("Columna(entre 0 y 2): ");
-                columna = Integer.parseInt(br.readLine());
-                if (tablero[fila][columna] == 0) {
-                    tablero[fila][columna] = 2;
-                    visualizarTablero(tablero);
-                    tiradas += 1;
-                } else {
-                    System.err.println("Casilla ocupada...");
-                    i -= 1;
-                }
-
+                turno = 2;
             }
 
+            System.out.println("Turno de Jugador "+turno+"\n" + "Fila(entre 0 y 2): ");
+            fila = Integer.parseInt(br.readLine());
+            System.out.println("Columna(entre 0 y 2): ");
+            columna = Integer.parseInt(br.readLine());
+            if (tablero[fila][columna] == 0) {
+                tablero[fila][columna] = turno;
+                visualizarTablero(tablero);
+                tiradas += 1;
+            } else {
+                System.err.println("Casilla ocupada...");
+                i -= 1;
+            }
 
         }
         if (tiradas < turnosPosibles) {
