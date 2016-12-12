@@ -40,6 +40,13 @@ public class Main {
         do {
             System.out.println("Escribe \"Terminar\" o presiona enter");
             ter = br.readLine();
+            paleatoria = r.nextInt(3);
+            if (turno == 0) {
+                System.out.println("Turno de jugador 1");
+            } else {
+                System.out.println("Turno de jugador 2");
+            }
+
             if (!ter.equalsIgnoreCase("terminar")) {
 
                 System.out.println(P[paleatoria]);
@@ -77,6 +84,7 @@ public class Main {
                     turno = 0;
                 }
             }
+
         } while (!ter.equalsIgnoreCase("terminar"));
 
         System.out.println("Jugador 1 respuestas correctas " + j1r + " de " + j1p);
